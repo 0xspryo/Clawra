@@ -1,0 +1,42 @@
+
+The target repository "0xspryo/Clawra" is a brand new project (0 days old) with just 2 commits and a single branch, authored solely by "spyro." It contains a client-side React TypeScript UI implementation with 80 files total, focusing heavily on UI components under client/src/components/ui/. The brief description claims it represents "the future of unchain artificial economic evolution," but there is minimal substantive original code evidence present.
+
+🔍 Likely Origins
+The UI component files show multiple fingerprint hits to several repositories known for React UI component libraries or code generator templates. The strongest origin repos by match count are:
+
+catlog22/Claude-Code-Workflow (6 files matched)
+specui/specui (6 files matched)
+zeeklog/zeek.ai (5 files matched)
+dataelement/bisheng (4 files matched)
+hetrixq/LibreChat (4 files matched)
+hkust-itsc-gpt/InvestLM (4 files matched)
+OrionFable/lang-pro (4 files matched)
+Matches are primarily on UI component files such as alert-dialog.tsx, dropdown-menu.tsx, dialog.tsx, carousel.tsx, menubar.tsx, sidebar.tsx, etc.
+
+Small snippet matches in many cases correspond to React component exports or usage of primitive UI wrappers.
+
+These origin repos cluster around UI kit implementations or generated frontends, often the same or similar source templates used repeatedly.
+
+The server-side code (server/index.ts) shows matches to unrelated repos with minimal overlap, indicating generic boilerplate HTTP server code.
+
+📁 File-level Signals
+Files such as client/src/components/ui/alert-dialog.tsx, dialog.tsx, dropdown-menu.tsx, select.tsx, and toast.tsx match heavily to catlog22/Claude-Code-Workflow UI components.
+Other UI files like sidebar.tsx also have matches to both specui/specui and unrelated smaller repos, indicating common boilerplate code.
+Matches to server/index.ts are scattered and low-confidence across many unrelated repos, showing generic node.js express or similar server setup code.
+There is no sign of serious unique app logic or custom algorithms in the visible portion of the scan results. Most matching code is UI primitives or structural React components.
+The presence of skipped files (30/80 not scanned) leaves open whether there might be other unique or proprietary code elsewhere.
+🤖 Quality Indicators
+The repo is brand new with 2 commits and only one branch, likely bulk uploaded rather than organically developed.
+The code found is primarily UI component boilerplate likely mostly copied or adapted from open-source UI repositories or code generators such as those from catlog22/Claude-Code-Workflow and specui/specui.
+No AI tool-specific folders like .copilot or .claude were detected to explicitly suggest AI-generated code, but the heavy reuse of UI skeleton code indicates low originality.
+The description is vague and hype-like ("future of unchain artificial economic evolution") with no direct evidence of novel economic algorithms or business logic.
+Star and fork counts are zero, indicating no adoption or community vetting.
+Matches are almost exclusively low-level reusable UI component code widely available in open source, with no unique DeFi, crypto, or backend logic provenance.
+The filtered fork matches count is not reported, but given zero forks and no green flags related to adoption, this repo appears as an original upload, not a fork.
+🛡️ ZAUTH Score: 38/100
+The project is a brand new, single-author, low-commit-count repo primarily composed of copy-pasted or lightly adapted UI component code from several small to medium open-source UI repos. The lack of original substantive logic, low adoption, and boilerplate-heavy nature heavily weigh the score down, despite no explicit evidence of scam or malware.
+
+This score falls in the 30-49 range (Poor), indicating significant issues with originality or substance.
+
+📝 TLDR
+A freshly created React UI component library with minimal original logic mainly copied from smaller public UI projects like catlog22/Claude-Code-Workflow and specui/specui. The code is largely boilerplate and bulk uploaded, making it untrustworthy as a novel or valuable project in its current state.
