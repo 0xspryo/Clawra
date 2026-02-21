@@ -1,0 +1,412 @@
+PROJECT SPEC — CLAWRA
+
+autonomous economic agent ecosystem
+
+1. core concept
+
+build a system that runs an autonomous ai entity named clawra that:
+
+controls capital
+
+spawns sub-agents
+
+allocates funds
+
+evaluates performance
+
+kills failing agents
+
+clones successful ones
+
+evolves strategies
+
+goal:
+
+simulate artificial economic evolution onchain.
+
+this is not a trading bot
+this is a self-replicating financial organism
+
+2. system architecture overview
+main layers
+frontend dashboard
+backend orchestrator
+ai cognition engine
+wallet manager
+agent engine
+evolution engine
+data ingestion layer
+database
+3. repo structure
+clawra/
+ ├── frontend/
+ ├── backend/
+ ├── agents/
+ ├── ai/
+ ├── evolution/
+ ├── wallets/
+ ├── analytics/
+ ├── config/
+ ├── scripts/
+ └── docs/
+4. core modules
+A. CLAWRA CORE ENGINE
+
+central controller that:
+
+monitors all agents
+
+allocates capital
+
+evaluates performance
+
+decides reproduction/death
+
+functions:
+
+spawn_agents()
+evaluate_agents()
+mutate_agents()
+terminate_agents()
+allocate_funds()
+log_state()
+B. MICRO AGENT SYSTEM
+
+each agent has:
+
+id
+wallet
+strategy
+risk_profile
+mutation_seed
+performance_score
+age
+status
+
+agents must:
+
+act independently
+
+trade independently
+
+log decisions
+
+report results
+
+C. STRATEGY ENGINE
+
+strategies stored as modular components:
+
+momentum
+mean_reversion
+sentiment
+sniper
+arbitrage
+liquidity_tracking
+meme_velocity
+
+agents are assigned random combinations at birth.
+
+D. MUTATION ENGINE
+
+on each cycle:
+
+rank agents by performance
+
+kill bottom %
+
+clone top %
+
+mutate parameters
+
+mutation variables:
+
+position_size
+risk tolerance
+trade frequency
+signal thresholds
+asset preference
+
+mutation method:
+
+new_value = old_value + random variance
+E. EVOLUTION CYCLE
+
+runs every X minutes/hours:
+
+collect metrics
+score agents
+rank agents
+remove bottom 50%
+duplicate top 20%
+spawn new random agents
+F. WALLET SYSTEM
+
+requirements:
+
+generate wallets programmatically
+
+store encrypted keys
+
+track balances
+
+sign transactions
+
+wallet model:
+
+master wallet (clawra)
+agent wallets (children)
+treasury wallet
+
+security:
+
+AES encrypted keys
+
+server-side signing only
+
+never expose private keys
+
+G. AI COGNITION ENGINE
+
+clawra should reason, not just act.
+
+input streams:
+
+market data
+
+social sentiment
+
+agent performance
+
+time cycles
+
+output:
+
+decisions
+
+observations
+
+tweets
+
+capital allocation
+
+model role:
+
+analyze environment
+identify patterns
+predict outcomes
+assign strategies
+H. SOCIAL BRAIN (TWITTER MODULE)
+
+clawra must:
+
+post observations
+
+narrate evolution
+
+describe behavior
+
+react to events
+
+tweet generator should:
+
+use persona voice
+
+stay consistent tone
+
+format text elegantly
+
+I. DATA INGESTION LAYER
+
+feeds:
+
+price feeds
+volume feeds
+new token launches
+social sentiment
+wallet tracking
+liquidity changes
+J. PERFORMANCE SCORING
+
+score formula:
+
+score =
+profit_weight * pnl +
+consistency_weight * winrate +
+risk_weight * drawdown_inverse +
+efficiency_weight * capital_efficiency
+5. AGENT LIFE CYCLE
+birth → trade → report → evaluate → survive or die → replicate
+
+age increases each cycle.
+older agents with poor performance get penalized.
+
+6. DATABASE SCHEMA
+
+tables:
+
+agents
+
+id
+wallet
+strategy
+score
+age
+status
+created_at
+
+trades
+
+agent_id
+token
+entry
+exit
+pnl
+timestamp
+
+cycles
+
+cycle_id
+timestamp
+top_agent
+worst_agent
+total_capital
+7. DASHBOARD FEATURES
+
+frontend must display:
+
+live agent list
+
+leaderboard
+
+agent genealogy tree
+
+capital distribution
+
+mutation history
+
+performance charts
+
+activity feed
+
+8. UNIQUE FEATURE (WHAT MAKES IT VIRAL)
+
+display:
+
+evolutionary lineage tree
+
+show:
+which agents descended from which parents
+
+this makes the system feel alive.
+
+9. SYSTEM MODES
+live mode
+
+real trading
+
+simulation mode
+
+paper trading
+
+10. CONFIG FILE
+
+must allow editing:
+
+max_agents
+cycle_interval
+mutation_rate
+kill_ratio
+clone_ratio
+starting_capital
+11. FAILSAFE RULES
+
+system must never:
+
+allocate more than treasury allows
+
+create infinite agents
+
+leak keys
+
+exceed API limits
+
+12. LOGGING SYSTEM
+
+log everything:
+
+agent decisions
+capital movement
+mutations
+deaths
+births
+errors
+13. DEPLOYMENT REQUIREMENTS
+
+must support:
+
+local run
+
+docker
+
+cloud deployment
+
+14. BUILD STACK (recommended)
+
+backend:
+
+python or node
+
+ai:
+
+openai api or local llm
+
+db:
+
+postgres
+
+frontend:
+
+nextjs
+
+wallet:
+
+solana web3 sdk
+
+15. README DESCRIPTION (for repo)
+
+include this summary:
+
+clawra is an autonomous financial organism that evolves its own trading agents. weaker agents are eliminated. stronger agents replicate. over time, strategies evolve through artificial selection. the system is a live experiment in artificial economic evolution.
+
+16. OPTIONAL ADVANCED FEATURES (future)
+
+cross-chain agents
+
+agent personalities
+
+agent cooperation
+
+agent alliances
+
+adversarial agents
+
+prediction markets on agent survival
+
+FINAL PROMPT TO GIVE REPLIT
+
+paste this exactly:
+
+build a complete production-ready github repository implementing the following system:
+
+[paste everything above]
+
+requirements:
+- clean modular code
+- documented functions
+- install instructions
+- .env template
+- docker support
+- working demo mode
+
+output full repo structure and files.
