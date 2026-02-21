@@ -1,149 +1,203 @@
-# CLAWRA
+# OpenClaw Agent
 
-A dual-purpose Solana application combining wallet management tools with an autonomous AI agent evolution system.
+**Autonomous Closed-Loop Trading Agent Evolution on Solana**
 
----
-
-## Features
-
-### Wallet Distributor
-- **Auto-generate** Solana developer wallets (keypair generation)
-- **Check SOL balance** for any wallet
-- **Distribute SOL** proportionally across multiple newly-generated wallets
-- **Withdraw/Sweep** — collect all distributed SOL back to a single destination address
-- **Network toggle** — switch between Solana mainnet and devnet
-- **Export wallets** — copy to clipboard or download as JSON
-
-### CLAWRA (Closed-Loop Autonomous Wallet & Redistribution Architecture)
-- **Agent Spawning** — autonomous trading agents with randomized strategies (momentum, mean reversion, sniper, arbitrage, sentiment, liquidity tracking, meme velocity)
-- **Simulated Trading** — agents execute trades across Solana tokens (SOL, BONK, WIF, JUP, PYTH, RAY, ORCA, and more)
-- **Evolution Engine** — genetic evolution cycles that evaluate agent performance, eliminate the weakest 30%, and clone the top 20% with parameter mutations
-- **Lineage Tracking** — full parent-child lineage tree across generations with mutation history
-- **Performance Analytics** — leaderboards, strategy comparison, token-level P&L, risk distribution, and generation stats
-- **Live Dashboard** — real-time control center with activity feed, trade log, and evolution history
+OpenClaw is an autonomous agent framework that spawns, evaluates, and evolves populations of AI trading agents on the Solana blockchain. It uses genetic algorithm-based natural selection to discover optimal trading parameter configurations across generations — no human intervention required.
 
 ---
 
-## Tech Stack
+## What It Does
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React, Vite, Tailwind CSS, shadcn/ui |
-| Backend | Node.js, Express.js |
-| Database | PostgreSQL with Drizzle ORM |
-| Blockchain | @solana/web3.js, bs58 |
-| State Management | TanStack React Query |
-| Routing | Wouter |
+OpenClaw runs a continuous autonomous evolution loop:
+
+1. **Spawn** — Agents are created with unique Solana wallets and randomized trading parameters
+2. **Simulate** — Each agent executes trades across Solana ecosystem tokens (SOL, BONK, WIF, JUP, PYTH, RAY, ORCA, etc.)
+3. **Evaluate** — A multi-factor fitness function scores each agent on profitability, consistency, risk management, and capital efficiency
+4. **Evolve** — Bottom 30% are eliminated, top 20% are cloned with parameter mutations, and random agents are injected for genetic diversity
+5. **Repeat** — The cycle continues autonomously, with each generation producing agents better adapted to market conditions
+
+Over time, the population converges on parameter combinations that produce consistent returns while maintaining diversity through controlled randomness.
 
 ---
 
-## Project Structure
+## Key Features
+
+- **Autonomous Evolution** — No manual tuning. The genetic algorithm discovers optimal configurations through natural selection pressure
+- **Real Solana Wallets** — Each agent gets a unique Ed25519 keypair. The framework is blockchain-native from the ground up
+- **Multi-Strategy Support** — Agents can combine up to 3 strategies: momentum, mean reversion, sentiment analysis, sniping, arbitrage, liquidity tracking, meme velocity
+- **Composite Fitness Scoring** — Agents aren't ranked on raw P&L alone. The fitness function weighs profitability (35%), win rate (25%), drawdown resistance (20%), and capital efficiency (20%)
+- **Mutation with Memory** — Every parameter change during cloning is recorded. Full lineage trees show how strategies evolved across generations
+- **Live Dashboard** — Real-time monitoring of agent populations, trade activity, evolution cycles, and performance analytics
+- **Wallet Distribution Tools** — Built-in utilities for SOL distribution and fund sweeping across agent wallets
+
+---
+
+## Architecture
 
 ```
-├── client/src/
-│   ├── pages/
-│   │   ├── home.tsx                 # Wallet distributor UI
-│   │   ├── clawra-dashboard.tsx     # CLAWRA control center
-│   │   ├── clawra-agents.tsx        # Agent registry + detail views
-│   │   ├── clawra-evolution.tsx     # Lineage tree + mutation history
-│   │   └── clawra-analytics.tsx     # Performance analytics
-│   ├── App.tsx                      # Sidebar navigation + routing
-│   └── lib/queryClient.ts           # API client setup
-├── server/
-│   ├── routes.ts                    # All API endpoints
-│   ├── storage.ts                   # Database interface (Drizzle)
-│   └── simulation.ts               # Agent engine + evolution logic
-├── shared/
-│   └── schema.ts                    # Database schema + validation types
-└── drizzle.config.ts
+┌──────────────────────────────────────────────────────────────┐
+│                     OpenClaw Agent Core                       │
+│                                                              │
+│  ┌─────────────┐  ┌──────────────┐  ┌────────────────────┐  │
+│  │  Spawner     │  │  Simulator   │  │  Evolution Engine  │  │
+│  │  - Keypair   │  │  - Trades    │  │  - Fitness eval    │  │
+│  │  - Params    │  │  - P&L calc  │  │  - Selection       │  │
+│  │  - Strategy  │  │  - Markets   │  │  - Cloning         │  │
+│  │    selection │  │              │  │  - Mutation         │  │
+│  └──────┬──────┘  └──────┬───────┘  └─────────┬──────────┘  │
+│         │                │                     │             │
+│         └────────────────┼─────────────────────┘             │
+│                          │                                   │
+│                  ┌───────┴───────┐                           │
+│                  │   PostgreSQL  │                           │
+│                  │   (Drizzle)   │                           │
+│                  └───────────────┘                           │
+│                                                              │
+│  ┌─────────────────────────────────────────────────────────┐ │
+│  │              Dashboard & Analytics UI                    │ │
+│  │  React + Vite + shadcn/ui + TanStack Query              │ │
+│  └─────────────────────────────────────────────────────────┘ │
+└──────────────────────────────────────────────────────────────┘
 ```
 
----
-
-## API Endpoints
-
-### Wallet Tools
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/generate-wallet` | Generate a new Solana keypair |
-| POST | `/api/balance` | Check SOL balance |
-| POST | `/api/distribute` | Distribute SOL across N wallets |
-| POST | `/api/withdraw` | Sweep SOL back to a destination |
-
-### CLAWRA System
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/clawra/dashboard` | Dashboard statistics |
-| GET | `/api/clawra/agents` | List all agents (keys excluded) |
-| GET | `/api/clawra/agents/:id` | Agent detail with trades & mutations |
-| POST | `/api/clawra/agents/spawn` | Spawn a new agent |
-| POST | `/api/clawra/evolve` | Run an evolution cycle |
-| GET | `/api/clawra/trades` | Recent trade history |
-| GET | `/api/clawra/cycles` | Evolution cycle history |
-| GET | `/api/clawra/mutations` | Mutation records |
-| GET | `/api/clawra/activity` | System activity feed |
-| GET | `/api/clawra/lineage` | Lineage tree data |
+See [ARCHITECTURE.md](./ARCHITECTURE.md) for the full technical deep-dive including algorithm specifics, data models, and API documentation.
 
 ---
 
-## How CLAWRA Works
+## Agent Parameters
 
-1. **Spawn** — Agents are created with random strategies, risk profiles, position sizes, and trade parameters. Each agent gets a unique Solana wallet.
+Each agent is defined by these evolvable parameters:
 
-2. **Simulate** — Agents execute simulated trades based on their strategy and parameters. Performance is measured by P&L, win rate, drawdown, and capital efficiency.
+| Parameter | Range | What It Controls |
+|-----------|-------|-----------------|
+| `riskProfile` | 0.1 – 0.9 | Trade volatility exposure |
+| `positionSize` | 0.01 – 0.5 | Capital fraction per trade |
+| `tradeFrequency` | 0.1 – 1.0 | Trades per simulation tick |
+| `signalThreshold` | 0.2 – 0.9 | Confidence needed to enter |
+| `strategy[]` | 1–3 strategies | Trading approach combination |
+| `assetPreference` | Token symbol | Primary market |
 
-3. **Evaluate** — A composite performance score is calculated:
-   - 35% total P&L
-   - 25% win rate
-   - 20% drawdown resistance
-   - 20% capital efficiency
+During evolution, these parameters undergo bounded uniform random mutation (±15% for most, ±7.5% for position sizing) with a 20% chance of strategy crossover.
 
-4. **Evolve** — Each evolution cycle:
-   - Bottom 30% of agents are eliminated
-   - Top 20% are cloned with genetic mutations (risk profile, position size, trade frequency, signal threshold)
-   - One completely new random agent is introduced
-   - All mutations are recorded for lineage tracking
+---
 
-5. **Repeat** — Over successive cycles, successful strategies propagate and refine through natural selection.
+## Fitness Function
+
+Agents are scored using a weighted composite:
+
+```
+fitness = 0.35 × normalized_pnl
+        + 0.25 × win_rate
+        + 0.20 × drawdown_resistance
+        + 0.20 × capital_efficiency
+```
+
+This formula rewards agents that are profitable AND consistent, while penalizing those with catastrophic losses even if their average returns are high.
 
 ---
 
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js 20+
 - PostgreSQL database
+- Solana wallet (for distribution tools)
 
-### Setup
+### Installation
 
 ```bash
-# Install dependencies
+git clone https://github.com/your-org/openclaw-agent.git
+cd openclaw-agent
 npm install
+```
 
-# Set up environment variables
-# DATABASE_URL=your_postgresql_connection_string
+### Environment
 
-# Push database schema
-npm run db:push
+Create a `.env` file (see `.env.example`):
 
-# Start development server
+```
+DATABASE_URL=postgresql://user:password@host:5432/openclaw
+SESSION_SECRET=your-session-secret
+```
+
+### Run
+
+```bash
 npm run dev
 ```
 
-The app will be available at `http://localhost:5000`.
+The dashboard will be available at `http://localhost:5000`.
 
-On first run, the system automatically seeds 12 initial agents and runs 8 evolution cycles to populate the dashboard with data.
+On first run, OpenClaw automatically seeds 12 origin agents and runs 8 evolution cycles to build an initial population with lineage history.
+
+---
+
+## Project Structure
+
+```
+├── server/
+│   ├── simulation.ts      # Core evolution engine (spawn, trade, evaluate, evolve)
+│   ├── storage.ts          # Database storage layer (Drizzle ORM)
+│   ├── routes.ts           # REST API endpoints
+│   └── index.ts            # Server entry point
+├── client/
+│   └── src/
+│       ├── pages/
+│       │   ├── home.tsx              # Wallet distribution tools
+│       │   ├── clawra-dashboard.tsx  # Agent control center
+│       │   ├── clawra-agents.tsx     # Agent registry & detail views
+│       │   ├── clawra-evolution.tsx  # Lineage tree & mutation history
+│       │   └── clawra-analytics.tsx  # Performance analytics
+│       └── App.tsx                   # Sidebar navigation & routing
+├── shared/
+│   └── schema.ts           # Database schema & validation types
+├── docs/
+│   ├── EVOLUTION.md        # Evolution algorithm deep-dive
+│   └── AGENT_LIFECYCLE.md  # Agent lifecycle documentation
+├── ARCHITECTURE.md         # System architecture overview
+├── CHANGELOG.md            # Version history
+├── CONTRIBUTING.md         # Contribution guidelines
+└── LICENSE                 # MIT License
+```
+
+---
+
+## API Overview
+
+### Agent Evolution
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/clawra/agents/spawn` | POST | Spawn a new random agent |
+| `/api/clawra/evolve` | POST | Run one evolution cycle |
+| `/api/clawra/dashboard` | GET | Population stats |
+| `/api/clawra/agents` | GET | All agents (keys excluded) |
+| `/api/clawra/agents/:id` | GET | Agent detail with trades & mutations |
+| `/api/clawra/lineage` | GET | Lineage tree data |
+
+### Wallet Tools
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/generate-wallet` | POST | Generate Solana keypair |
+| `/api/balance` | POST | Check SOL balance |
+| `/api/distribute` | POST | Distribute SOL to N wallets |
+| `/api/withdraw` | POST | Sweep funds to destination |
+
+Full API documentation in [ARCHITECTURE.md](./ARCHITECTURE.md).
 
 ---
 
 ## Security
 
-- Agent wallet private keys are stored server-side only and are **never exposed** through API responses
-- All CLAWRA API endpoints return sanitized agent data (wallet address only)
+- Agent wallet private keys are stored server-side only and never exposed through API responses
+- All agent data returned to clients passes through `sanitizeAgent()` which strips the `walletPrivateKey` field
+- The lineage endpoint returns only safe fields (id, name, score, strategy, status)
 - Wallet distributor private keys are handled in-memory and never persisted
 
 ---
 
 ## License
 
-MIT
+MIT — see [LICENSE](./LICENSE)
